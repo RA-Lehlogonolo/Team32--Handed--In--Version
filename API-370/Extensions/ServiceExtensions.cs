@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Contracts;
+using LoggerService;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,9 @@ namespace API_370.Extensions
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
+
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+
         }
 
         public static void ConfigureIISIntegration(this IServiceCollection services)

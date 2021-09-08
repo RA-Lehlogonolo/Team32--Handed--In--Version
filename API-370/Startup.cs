@@ -1,16 +1,23 @@
 using API_370.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts;
+using LoggerService;
+
+
 
 namespace API_370
 {
@@ -18,6 +25,7 @@ namespace API_370
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -28,6 +36,7 @@ namespace API_370
         {
             services.ConfigureCors();
             services.ConfigureIISIntegration();
+            //services.ConfigureLoggerService();
             services.AddControllers();
         }
 
@@ -41,7 +50,16 @@ namespace API_370
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
+
 
             app.UseAuthorization();
 
