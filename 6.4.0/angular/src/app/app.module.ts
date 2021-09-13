@@ -38,6 +38,10 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+import { MenuTypeComponent } from './menu-type/menu-type.component';
+import { MealTypeComponent } from './meal-type/meal-type.component';
+import { MaintenanceCategoryComponent } from './maintenance-category/maintenance-category.component';
+import { MaintenanceRequestStatusComponent } from './maintenance-request-status/maintenance-request-status.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +71,11 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     SidebarComponent,
     SidebarLogoComponent,
     SidebarUserPanelComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent,
+    MenuTypeComponent,
+    MealTypeComponent,
+    MaintenanceCategoryComponent,
+    MaintenanceRequestStatusComponent
   ],
   imports: [
     CommonModule,
